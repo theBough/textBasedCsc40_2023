@@ -17,6 +17,10 @@ function gameStart(){
   output.innerHTML += "</br>>>"  + input.value
   if(input.value == "h"){
     output.innerHTML += "</br>" + help
+  }else if(input.value == 't'){
+    output.innerHTML += "</br>Head to the Lobby"
+  }else if(input.value == "corbin"){
+    output.innerHTML += "</br> You found the easter egg, you get an A in Comp Sci"
   }
   output.scrollTop = output.scrollHeight
 }
