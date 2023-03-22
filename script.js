@@ -1,3 +1,5 @@
+var activeRow = 0;
+var activeColumn = 0;
 var move = false
 var output = document.getElementById("output")
 var input = document.getElementById("myText");
@@ -37,16 +39,20 @@ function moveIsOn(){
   output.innerHTML += "</br>>>" + input.value
   switch(input.value){
     case "e":
-      output.innerHTML += "</br>>> You walked east down the hallway."
+      activeColumn += 1
+      output.innerHTML += "</br>>>" + rooms[activeRow][activeColumn]
     break;
     case "s":
-      
+      activeRow += 1
+      output.innerHTML += "</br>>>" + rooms[activeRow][activeColumn]
     break;
     case "w":
-      
+      activeColumn -=1
+      output.innerHTML += "</br>>>" + rooms[activeRow][activeColumn]
     break;
     case "n":
-      
+      activeRow += 1
+      output.innerHTML += "</br>>>" + rooms[activeRow][activeColumn]
     break;
   }//end switch
 }//end moveIsOn
