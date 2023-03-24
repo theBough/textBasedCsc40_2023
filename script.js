@@ -40,19 +40,16 @@ function moveIsOn(){
   switch(input.value){
     case "e":
       activeColumn += 1
-      output.innerHTML += "</br>>>" + rooms[activeRow][activeColumn]
     break;
     case "s":
       activeRow += 1
-      output.innerHTML += "</br>>>" + rooms[activeRow][activeColumn]
     break;
     case "w":
       activeColumn -=1
-      output.innerHTML += "</br>>>" + rooms[activeRow][activeColumn]
     break;
     case "n":
-      activeRow += 1
-      output.innerHTML += "</br>>>" + rooms[activeRow][activeColumn]
+      activeRow -= 1
     break;
   }//end switch
+   output.innerHTML += "</br>>>" + rooms[activeRow][activeColumn].description
 }//end moveIsOn
