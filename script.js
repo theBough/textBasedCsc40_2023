@@ -17,7 +17,7 @@ var help =
   m - move</br>\
   *********************************</br>"
 function gameStart() {
-  if (move) {
+  if (move && roomRestriction()) {
     moveIsOn();
   } else {
     output.innerHTML += "</br>>>" + input.value
@@ -30,8 +30,11 @@ function gameStart() {
     }else if (input.value == "m") {
       output.innerHTML += "</br> What direction do you want to go?</br><small>(e-East w-West n-North s-South)</small>"
       move = true;
-    }//end if statemtemt
+    }else{
+      output.innerHTML += "</br> Sorry I don't understand that command"
+    }
   }//end if statemtent
+  input.value = ""
   output.scrollTop = output.scrollHeight
 }//end Gamestart
 function moveIsOn(){
@@ -53,3 +56,18 @@ function moveIsOn(){
   }//end switch
    output.innerHTML += "</br>>>" + rooms[activeRow][activeColumn].description
 }//end moveIsOn
+function roomRestriction(){
+ /*This function based on a  direction letter
+  of either n,e,s,w if we need restrict a room 
+  we will do it here.
+  Add an if-Block for each restriction you want.
+  */ 
+  if(rooms[activeRow][activeColumn].name == "Room 100" && input.value == "n"){
+    /*They are in room 100, and want to go North, I want to stop them 
+    from doing that.*/
+    output.innerHTML += "</br>Sorry there is no door there</br>"
+    return false;
+  }//end if
+
+  return true;
+}//end roomRestriction
