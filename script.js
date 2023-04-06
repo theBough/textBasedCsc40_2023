@@ -1,6 +1,10 @@
 var activeRow = 0;
 var activeColumn = 0;
 var move = false
+var use = false;
+//items in the game
+var haveSword = true;
+
 var output = document.getElementById("output")
 var input = document.getElementById("myText");
 input.addEventListener("keyup", function(event) {
@@ -13,16 +17,23 @@ input.addEventListener("keyup", function(event) {
 var help =
   "********************************</br>\
   h - help</br>\
+  u- use</br>\
   t - gain a tip(hint)</br>\
   m - move</br>\
   *********************************</br>"
 function gameStart() {
   if (move && roomRestriction()) {
     moveIsOn();
-  } else {
+  } else if(use){
+    //resolve the USE command
+    useIsOn();
+  }else {
     output.innerHTML += "</br>>>" + input.value
     if (input.value == "h") {
       output.innerHTML += "</br>" + help
+    }else if(input.value == 'u'){
+      output.innerHTML += "</br>What in your inventory would you like to use?"
+      use = true;
     } else if (input.value == 't') {
       output.innerHTML += "</br>Head to the Lobby"
     } else if (input.value == "corbin") {
@@ -71,3 +82,19 @@ function roomRestriction(){
 
   return true;
 }//end roomRestriction
+function useIsOn(){
+  /* this will resolve what item the user wants to use.
+*/
+  use = false;
+   output.innerHTML += "</br>>>" + input.value
+  //check to see what item they want to use
+  //also going to check they are using it in the proper room
+  //in the case below they have to use the sword in room 100
+  if(input.value == "sword" && rooms[activeRow][activeColumn].name == "Room 100"){
+    if(haveSword){
+      output.innerHTML += "</br>>>You take out your shinny sword, and with great skill stab the deadly mosquito right through the heart!</br>It flutters its wings and falls to its death on the floor. You pick it up and store it in your inventory."
+    }
+  }else{
+    output.innerHTML += "</br>>>Sorry you either don't have that object or you can't use it here."
+  }
+}
