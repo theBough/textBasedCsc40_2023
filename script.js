@@ -1,9 +1,16 @@
 var activeRow = 0;
 var activeColumn = 0;
+
+/*anytime you have a command that needs a 
+follow up question ad it to the list below
+*/
 var move = false
 var use = false;
+var grab = false
 //items in the game
 var haveSword = true;
+var items = []
+
 
 var output = document.getElementById("output")
 var input = document.getElementById("myText");
@@ -27,10 +34,16 @@ function gameStart() {
   } else if(use){
     //resolve the USE command
     useIsOn();
+  }else if(grab){
+    //resolve what the player wants to grab.
+    grabIsOn();
   }else {
     output.innerHTML += "</br>>>" + input.value
     if (input.value == "h") {
       output.innerHTML += "</br>" + help
+    }else if(input.value =="g"){
+      grab = true;
+      output.innerHTML += "</br>What would you like to grab?"
     }else if(input.value == 'u'){
       output.innerHTML += "</br>What in your inventory would you like to use?"
       use = true;
@@ -96,5 +109,16 @@ function useIsOn(){
     }
   }else{
     output.innerHTML += "</br>>>Sorry you either don't have that object or you can't use it here."
+  }
+}
+function grabIsOn(){
+  grab = false;
+
+  //this if block is to check what item they want to pick up
+  //and makes sure they are in the right room.
+  if(input.value == "sword"  && rooms[activeRow][activeColumn].name == "Room 100"){
+    //add the item to our array called 'items'
+    items.push("sword")
+    output.innerHTML += "</br>You grab the shiny new sword and add it to your inventory."
   }
 }
